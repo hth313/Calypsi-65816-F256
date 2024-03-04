@@ -12,7 +12,7 @@
 #include <f256/via.h>
 #include <f256/vicky.h>
 
-struct CompleteF256 {
+struct _CompleteF256 {
   uint8_t gamma_blue[0x400];
   uint8_t gamma_green[0x400];
   uint8_t gamma_red[0x400];
@@ -77,7 +77,7 @@ struct CompleteF256 {
     struct {
       struct _InterruptController interrupt_pending;
       struct _InterruptController interrupt_mask;
-    };
+    } interrupt_controller;
     char _skip_interrupt_controller[0x10];
   };
 
@@ -128,22 +128,28 @@ struct CompleteF256 {
   uint8_t color_memory[0x2000];
 };
 
-// If compiler is not configured to use the Near data model, we set it
-// up so that Near is the I/O bank.
-#ifdef __CALYPSI_DATA_MODEL_NEAR__
+// In the large and huge data model we default Near point to the I/O bank.
+// provided that
+#if defined(__CALYPSI_DATA_MODEL_FAR__) || defined(__CALYPSI_DATA_MODEL_HUGE__)
 #define __IO __attribute__((near))
 #else
 #define __IO __attribute__((far))
 #endif
 
 // Vicky base address has been set up by C startup.
-#define _CompleteF256 (* (volatile struct CompleteF256 __IO *)0xf00000)
+#define F256_IO (* (volatile struct _CompleteF256 __IO *)0xf00000)
 
-#define SystemControl        _CompleteGavin.system_control
-//#define RTC                  _CompleteGavin.rtc
-//#define InterruptController  _CompleteGavin.interrupt_controller
-//#define Timer                _CompleteGavin.timer
-//#define Joystick             _CompleteGavin.joystick
-//#define UART                 _CompleteGavin.uart
+#define SystemControl        F256_IO.system_control
+#define DMA                  F256_IO.dma
+#define RTC                  F256_IO.rtc
+#define SDC                  F256_IO.sdc
+#define InterruptController  F256_IO.interrupt_controller
+#define Timer                F256_IO.timer
+#define UART                 F256_IO.uart
+#define Vicky                F256_IO.vicky
+#define SidLeft              F256_IO.sid_left
+#define SidMono              F256_IO.sid_mono
+#define SidRight             F256_IO.sid_right
+#define DIP                  F256_IO.dip
 
 #endif // __F256_H__
