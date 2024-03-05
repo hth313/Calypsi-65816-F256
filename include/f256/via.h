@@ -6,11 +6,7 @@
 
 #include <stdint.h>
 
-typedef struct via via_t;
-
-#define VIA  (* (volatile vicky_t*) 0xdc00)
-
-struct via {
+struct _VIA {
   uint8_t a;      // register A
   uint8_t b;      // register B
   uint8_t ddrb;   // data direction register B

@@ -81,6 +81,6 @@ struct _DIP_switch {
   uint8_t user1            : 1;
   uint8_t user2            : 1;
   uint8_t gamma_correction : 1;
-} DIP_switch_t;
+};
 
 #endif // __F256_SYSTEM_H__

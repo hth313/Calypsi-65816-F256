@@ -104,18 +104,18 @@ struct _CompleteF256 {
   char _skip_reserved_2[0x110];
   uint8_t text_foreground_color[0x40];
   uint8_t text_background_color[0x40];
-  char _skip_snes_joystick[0x10];
+  char _skip_snes_joystick[0x80];
   sprite_t sprite[64];
-  char _skip_via1[0x10];
-  char _skip_via0[0x10];
+  char _skip_via1[0x100];
+  char _skip_via0[0x100];
 
   union {
     struct _SDC sdc;
-    char _skip_sdc[0x10];
+    char _skip_sdc[0x100];
   };
 
   char _skip_math[0x20];
-  char _skip_reserved_3[0xd0];
+  char _skip_reserved_3[0xe0];
 
   union {
     struct _DMA dma;

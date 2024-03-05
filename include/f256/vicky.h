@@ -6,10 +6,6 @@
 
 #include <stdint.h>
 
-typedef struct _Vicky Vicky_t;
-
-#define Vicky (* (volatile Vicky_t*) 0xd000)
-
 typedef struct color {
   uint8_t blue;
   uint8_t green;
@@ -17,10 +13,7 @@ typedef struct color {
 } color_t;
 
 // Flat video ram address 0 - 256K
-typedef struct vram {
-  uint8_t* base;
-  uint8_t  bank;
-} vram_ptr;
+typedef uint8_t __far24 *vram_ptr;
 
 // ----------------------------------------------------------------------
 //
@@ -129,10 +122,6 @@ typedef struct bitmap {
   uint8_t _reserved[4];
 } bitmap_t;
 
-// There are two bitmap layers, use them as Bitmap[n].field
-// where n is 0-1.
-#define Bitmap ((bitmap_t *)0xd100)
-
 // ----------------------------------------------------------------------
 //
 // Tilemap
@@ -167,17 +156,6 @@ typedef struct tilemap {
     uint16_t y_smooth_direction : 1;
   };
 } tilemap_t;
-
-// There are three tilemap layers, use them as Tilemap[n].field
-// where n is 0-2.
-#define Tilemap ((tilemap_t *)0xd200)
-
-struct vram_ptr32 {
-  vram_ptr ptr;
-  uint8_t _filler;
-};
-
-#define TileAddy ((struct vram_ptr32 *)0xd280)
 
 // ----------------------------------------------------------------------
 //
