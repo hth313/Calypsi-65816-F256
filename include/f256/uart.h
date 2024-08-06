@@ -8,27 +8,29 @@
 
 struct _UART {
   union {
-    uint16_t baud;     // when DLAB=1
+    uint16_t baud; // when DLAB=1
     struct {
-      union {          // data register, send and receive
-        uint8_t data;
-        uint8_t rhr;
-        uint8_t thr;
+      struct {
+	union {          // data register, send and receive
+	  uint8_t data;
+	  uint8_t rhr;
+	  uint8_t thr;
+	};
       };
-    };
-  };
-  union {          // interrupt enable
-    struct {
-      uint8_t interrupt_enable_receive      : 1;
-      uint8_t interrupt_enable_transmit     : 1;
-      uint8_t interrupt_enable_line_status  : 1;
-      uint8_t interrupt_enable_modem_status : 1;
-    };
-    uint8_t ier;
+      union {          // interrupt enable
+	struct {
+	  uint8_t interrupt_enable_receive      : 1;
+	  uint8_t interrupt_enable_transmit     : 1;
+	  uint8_t interrupt_enable_line_status  : 1;
+	  uint8_t interrupt_enable_modem_status : 1;
+	};
+        uint8_t ier;
+      };
 #define INTERRUPT_ENABLE_RECEIVE      0x01
 #define INTERRUPT_ENABLE_TRANSMIT     0x02
 #define INTERRUPT_ENABLE_LINE_STATUS  0x04
 #define INTERRUPT_ENABLE_MODEM_STATUS 0x08
+    };
   };
   union {
     union {
