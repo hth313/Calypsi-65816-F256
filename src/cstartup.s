@@ -57,7 +57,7 @@ __program_start:
               tcd                   ; set direct page
 #ifdef __CALYPSI_DATA_MODEL_SMALL__
               lda     ##0
-#elif defined(__CALYPSI_DATA_MODEL_NEAR__)
+#elif defined(__CALYPSI_DATA_MODEL_MEDIUM__)
               lda     ##.word2 _NearBaseAddress
 #else
 	      lda     ##0x00f0	    ; IO bank
