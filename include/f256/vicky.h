@@ -98,8 +98,8 @@ enum VickyGraphicsResolution {
 
 // Layers
 enum VickyLayer {
-  Layer_Bitmap0, Layer_Bitmap1,
-  Layer_Timemap0, Layer_Timemap1, Layer_Timemap2
+  Layer_Bitmap0, Layer_Bitmap1, Layer_Bitmap2,
+  Layer_Tilemap0, Layer_Tilemap1, Layer_Tilemap2
 };
 
 enum VickyCursorFlashRate {
