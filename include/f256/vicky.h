@@ -182,7 +182,7 @@ struct _Vicky {
     };
   };
 
-  uint8_t _reserve6[228];			      // Skip to the bitmap registers
+  uint8_t _reserve6[228];                 // Skip to the bitmap registers
 
   bitmap_t bitmap[3];
 };
